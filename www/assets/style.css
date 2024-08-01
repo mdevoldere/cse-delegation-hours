@@ -1,0 +1,77 @@
+:root {
+    --bg: white;
+    --txt: black;
+    --crm-primary: #1b296a; /* bleu foncé */
+    --crm-secondary: #ed6840; /* orange */
+    --crm-rf: #cf2d4f; /* rouge */
+    --crm-ofp: #7db9da; /* bleu clair */
+    --crm-services: #f6af2e; /* jaune */
+    --crm-mecenat: #488287; /* bleu vert */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 1.6rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: var(--bg);
+    color: var(--crm-primary)
+}
+
+a {
+    text-decoration: none;
+}
+
+h1, h2 {
+    margin: 0;
+    padding: .3rem;
+}
+
+body > * {
+    width: 120rem;
+    margin: auto;
+    color: var(--crm-primary)
+}
+
+body > header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    height: 8rem;
+}
+
+.login {
+    padding: 1rem;
+}
+
+.menu {
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+    list-style: none;
+}
+
+.menu a {
+    display: block;
+    padding: 1rem 2rem;
+    border: 1px solid var(--crm-secondary);
+    color: var(--crm-secondary);
+    background-color: var(--crm-primary);
+    transition: all ease .6s;
+}
+
+.menu a:hover {
+    border: 1px solid var(--crm-primary);
+    color: var(--crm-primary);
+    background-color: var(--crm-secondary);
+}
