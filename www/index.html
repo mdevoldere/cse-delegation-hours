@@ -6,14 +6,16 @@
     <title>CSE - Heures de délégations</title>
     <link rel="stylesheet" href="./assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="./assets/style.css">
+    <script src="./assets/js/vue.global.3.5.js"></script>
     <script src="./assets/main.js" type="module"></script>
 </head>
 <body>
+    <div id="app">
     <header>
         <img class="logo" src="./assets/logoh.jpg" alt="Logo CSE CRM">
         <h1>Gestion des heures de délégations</h1>
         <aside class="login">
-            <i class="fa fa-user"></i> MDevoldere <br> <a href="">Déconnexion</a>
+            <i class="fa fa-user"></i> {{ usr.login }} <br> <a href="">Déconnexion</a>
         </aside>
     </header>
     <nav>
@@ -29,5 +31,7 @@
     <footer>
 
     </footer>
+        
+    </div>
 </body>
 </html>

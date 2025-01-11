@@ -35,13 +35,13 @@ h1, h2 {
     padding: .3rem;
 }
 
-body > * {
+#app > * {
     width: 120rem;
     margin: auto;
     color: var(--crm-primary)
 }
 
-body > header {
+#app > header {
     display: flex;
     justify-content: space-between;
 }
