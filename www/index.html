@@ -14,19 +14,32 @@
     <header>
         <img class="logo" src="./assets/logoh.jpg" alt="Logo CSE CRM">
         <h1>Gestion des heures de délégations</h1>
-        <aside class="login">
-            <i class="fa fa-user"></i> {{ usr.login }} <br> <a href="">Déconnexion</a>
+        <aside class="login" v-if="usr.username === null">
+            
+        </aside>
+        <aside class="login" v-else>
+            <i class="fa fa-user"></i> {{ usr.username }} <br> <a href="">Déconnexion</a>
         </aside>
     </header>
-    <nav>
-        <ul class="menu">
-            <li><a href="">Accueil</a></li>
-            <li><a href="">Mon profil</a></li>
-            <li><a href="">Transfert d'heures</a></li>
-        </ul>
-    </nav>
-    <main>
-
+    <main v-if="usr.username === null" class="login">
+        <div>
+            <input type="text" placeholder="Identifiant" v-model="credentials.username">
+        </div>
+        <div>
+            <input type="password" placeholder="Mot de passe" v-model="credentials.password">
+        </div>
+        <div>
+            <button @click="login">S'identifier</button>
+        </div>
+    </main>
+    <main v-else>
+        <nav>
+            <ul class="menu">
+                <li><a href="">Accueil</a></li>
+                <li><a href="">Mon profil</a></li>
+                <li><a href="">Transfert d'heures</a></li>
+            </ul>
+        </nav>
     </main>
     <footer>
 

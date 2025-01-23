@@ -11,9 +11,9 @@ export class Ajax
         } 
     }
 
-    static async post(_body = {}) {
+    static async post(_url, _body = {}) {
         try {
-            const r = await fetch(this.url, {
+            const r = await fetch(_url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ export class Ajax
                 },
                 body: JSON.stringify(_body)
             });
-            return await (response.json());
+            return await (r.json());
         } catch (error) {
             console.error(error.message)
             return [];

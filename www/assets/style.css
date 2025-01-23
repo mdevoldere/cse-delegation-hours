@@ -35,6 +35,10 @@ h1, h2 {
     padding: .3rem;
 }
 
+button {
+    cursor: pointer;
+}
+
 #app > * {
     width: 120rem;
     margin: auto;
@@ -50,10 +54,6 @@ h1, h2 {
     height: 8rem;
 }
 
-.login {
-    padding: 1rem;
-}
-
 .menu {
     display: flex;
     gap: 1rem;
@@ -61,7 +61,7 @@ h1, h2 {
     list-style: none;
 }
 
-.menu a {
+.menu a, .login input, .login button {
     display: block;
     padding: 1rem 2rem;
     border: 1px solid var(--crm-secondary);
@@ -75,3 +75,46 @@ h1, h2 {
     color: var(--crm-primary);
     background-color: var(--crm-secondary);
 }
+
+.login {
+    padding: 5rem;
+    transform: scale(1.5);
+}
+
+.login div {
+    width: 24rem;
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem auto;
+}
+
+.login label {
+    display:inline-block;
+    width: 18rem;
+}
+
+.login input, .login button {
+    border: 1px solid var(--crm-primary);
+    color: var(--crm-primary);
+    background-color: var(--crm-secondary);
+    width: 22rem;
+}
+
+.login button { 
+    display: block;
+    border: 1px solid var(--crm-secondary);
+    color: var(--crm-secondary);
+    background-color: var(--crm-primary);
+}
+
+.login button:hover {
+    border: 1px solid var(--crm-primary);
+    color: var(--crm-primary);
+    background-color: var(--crm-secondary);
+
+}
+
+.login ::placeholder {
+    color: var(--crm-primary);
+    opacity: .8; /* Firefox */
+  }
