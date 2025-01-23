@@ -14,11 +14,9 @@
     <header>
         <img class="logo" src="./assets/logoh.jpg" alt="Logo CSE CRM">
         <h1>Gestion des heures de délégations</h1>
-        <aside class="login" v-if="usr.username === null">
-            
-        </aside>
-        <aside class="login" v-else>
-            <i class="fa fa-user"></i> {{ usr.username }} <br> <a href="">Déconnexion</a>
+        <aside v-if="usr.username === null"></aside>
+        <aside v-else>
+            <i class="fa fa-user"></i> {{ usr.username }} <br> <a href="#" @click="logout">Déconnexion</a>
         </aside>
     </header>
     <main v-if="usr.username === null" class="login">
@@ -40,6 +38,31 @@
                 <li><a href="">Transfert d'heures</a></li>
             </ul>
         </nav>
+        <section>
+            <h2>Membres du Comité Social et Économique</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Utilisateur</th>
+                        <th>Début mandat</th>
+                        <th>Fin mandat</th>
+                        <th>Titulaire</th>
+                        <th>Admin</th>
+                        <th>Heures / mois</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="m of members">
+                        <td :class="{ titular: m.titular }">{{ m.username }}</td>
+                        <td>{{ m.elected }}</td>
+                        <td>{{ m.expire }}</td>
+                        <td>{{ m.titular ? 'Oui' : 'Non' }}</td>
+                        <td>{{ m.admin ? 'Oui' : 'Non' }}</td>
+                        <td>{{ m.hours }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
     </main>
     <footer>
 
