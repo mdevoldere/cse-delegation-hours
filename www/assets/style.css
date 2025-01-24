@@ -65,13 +65,20 @@ button {
     list-style: none;
 }
 
-.menu a, .login input, .login button {
+.menu a, input, button {
     display: block;
     padding: 1rem 2rem;
     border: 1px solid var(--crm-secondary);
     color: var(--crm-secondary);
     background-color: var(--crm-primary);
     transition: all ease .6s;
+}
+
+
+input, button {
+    border: 1px solid var(--crm-primary);
+    color: var(--crm-primary);
+    background-color: var(--crm-secondary);
 }
 
 .menu a:hover {
@@ -92,33 +99,40 @@ button {
     margin: 1rem auto;
 }
 
-.login label {
+.profile div {
+    width: 60rem;
+    display: flex;
+    margin: 1rem;
+    justify-content: start;
+    align-items: stretch;
+}
+
+label {
     display:inline-block;
     width: 18rem;
 }
 
-.login input, .login button {
-    border: 1px solid var(--crm-primary);
-    color: var(--crm-primary);
-    background-color: var(--crm-secondary);
-    width: 22rem;
-}
 
-.login button { 
+.login button, .profile button { 
     display: block;
     border: 1px solid var(--crm-secondary);
     color: var(--crm-secondary);
     background-color: var(--crm-primary);
+    width: 21.1rem;
 }
 
-.login button:hover {
+.profile button {
+    width: 39.2rem;
+}
+
+button:hover {
     border: 1px solid var(--crm-primary);
     color: var(--crm-primary);
     background-color: var(--crm-secondary);
 
 }
 
-.login ::placeholder {
+::placeholder { 
     color: var(--crm-primary);
     opacity: .8; /* Firefox */
 }

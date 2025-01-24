@@ -16,18 +16,36 @@ class CseUser
         }
 
         let d = new Date(this.elected);
-        this.elected = d.toLocaleDateString();
+        this.electedFr = d.toLocaleDateString();
         d.setFullYear(d.getFullYear() + 4);
-        this.expire = d.toLocaleDateString();
+        this.expire = d.toLocaleDateString('fr-CA');
+        this.expireFr = d.toLocaleDateString();
+        this.setHours();
     }
 
     logout() {
         this.username = null;
         this.admin = false;
         this.elected = '0000-00-00';
+        this.electedFr = '00/00/0000';
         this.expire = '0000-00-00';
         this.titular = true;
         this.hours = 0;
+        this.month = [];
+    }
+
+    setHours() {
+        let s = new Date(this.elected);
+        let e = new Date(this.expire);
+        while(s <= e) {
+            //this.month.push(s.toLocaleDateString('fr-FR'));
+            this.month.push((('0' + (s.getMonth())).slice(-2)) + '/' + s.getFullYear());
+
+            s.setMonth(s.getMonth() + 1);
+            if(s.getMonth() == 0) {
+                s.setMonth(s.getMonth() + 1);
+            }            
+        }
     }
 }
 
@@ -37,6 +55,7 @@ const app = {
     },
     data() {
         return {
+            view: 'home',
             credentials: { username: null, password: null },
             usr: new CseUser(),
             members: []
@@ -63,6 +82,9 @@ const app = {
     },
 
     methods: {
+        goto(e) {
+            this.view = e.target.dataset.view;
+        },
         async login() {
             let r = await Ajax.post('./api/account.php', this.credentials);
 

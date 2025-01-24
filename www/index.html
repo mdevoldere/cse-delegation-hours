@@ -33,12 +33,13 @@
     <main v-else>
         <nav>
             <ul class="menu">
-                <li><a href="">Accueil</a></li>
-                <li><a href="">Mon profil</a></li>
-                <li><a href="">Transfert d'heures</a></li>
+                <li><a href="#" data-view="home" @click="goto">Accueil</a></li>
+                <li><a href="#" data-view="profile" @click="goto">Mon profil</a></li>
+                <li><a href="#" data-view="del" @click="goto">Mes heures</a></li>
+                <li><a href="#" data-view="donation" @click="goto">Transfert d'heures</a></li>
             </ul>
         </nav>
-        <section>
+        <section v-if="view === 'home'">
             <h2>Membres du Comité Social et Économique</h2>
             <table>
                 <thead>
@@ -54,14 +55,63 @@
                 <tbody>
                     <tr v-for="m of members">
                         <td :class="{ titular: m.titular }">{{ m.username }}</td>
-                        <td>{{ m.elected }}</td>
-                        <td>{{ m.expire }}</td>
+                        <td>{{ m.electedFr }}</td>
+                        <td>{{ m.expireFr }}</td>
                         <td>{{ m.titular ? 'Oui' : 'Non' }}</td>
                         <td>{{ m.admin ? 'Oui' : 'Non' }}</td>
                         <td>{{ m.hours }}</td>
                     </tr>
                 </tbody>
             </table>
+        </section>
+        <section v-else-if="view === 'profile'" class="profile">
+            <h2>Mon profil</h2>
+            <fieldset>
+                <legend>Mes informations</legend>
+                    <p><label>Identifiant:</label> {{ usr.username }}</p>
+                    <p><label>Date d'élection:</label> {{ usr.electedFr }}</p>
+                    <p><label>Fin de mandat:</label> {{ usr.expireFr }}</p>
+            </fieldset>
+            <fieldset>
+                <legend>Mon mot de passe</legend>
+                    <div>
+                        <label>Mot de passe actuel</label>
+                        <input type="password" placeholder="Mot de passe actuel" v-model="usr.password">
+                    </div>
+                    <div>
+                        <label>Nouveau mot de passe</label>
+                        <input type="password" placeholder="Nouveau mot de passe" v-model="usr.password">
+                    </div>
+                    <div>
+                        <button >Mettre à jour mon mot de passe</button>
+                    </div>
+        </section>
+        <section v-else-if="view === 'del'">
+            <h2>Mes heures de délégation</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Mois</td>
+                        <td>Nombre d'heures</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="m of usr.month">
+                        <td>{{ m }}</td>
+                        <td>{{ usr.hours }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+        <section v-else-if="view === 'donation'">
+            <h2>Transfert d'heures</h2>
+            <p>An error occured while processing this directive</p>
+            <p>Error code: 500/3</p>
+        </section>
+        <section v-else>
+            <h2>Oups</h2>
+            <p>Il n'y a rien à voir ici !</p>
         </section>
     </main>
     <footer>
