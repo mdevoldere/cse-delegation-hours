@@ -32,6 +32,11 @@ class Api
     public static function r(mixed $v): void { self::response(200, $v); }
     public static function e(mixed $v): void { self::error(404, $v); }
 
+    /**
+     * Convert Given Data to JSON
+     * @param mixed $d Data to convert
+     * @return string Data converted to json
+     */
     public static function toJson(mixed $d): string {
         return json_encode($d, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK | JSON_PRESERVE_ZERO_FRACTION);
     }

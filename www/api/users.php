@@ -1,22 +1,17 @@
 <?php 
 
-require_once '../../app/Api.php';
+try {
+    require_once '../../app/Loader.php';
 
-$t = require_once '../../data/members.php';
-
-foreach($t as $k => $m) {
-    unset($t[$k]['password']);
-}
-
-if(!empty($_GET['u'])) {
-    $d = $_GET['u'];
-
-    foreach($t as $m) {
-        if($d === $m['username']) {
-            Api::response(200, $m);
-        }
+    if(!empty($_GET['u'])) {
+        $d = trim($_GET['u']);
+        $t = AccountManager::getUser($d, false);
+    } else {
+        $t = AccountManager::getUsers(false);
     }
-    APi::error(401, 'Utilisateur inexistant.');
-}
 
-Api::response(200, $t);
+    Api::response(200, $t);
+}
+catch(Exception $e) {
+    APi::error($e->getCode(), $e->getMessage());
+}

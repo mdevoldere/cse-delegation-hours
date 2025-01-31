@@ -1,5 +1,5 @@
 <?php 
-
+/*
 class Account 
 {
     private string $username;
@@ -10,7 +10,7 @@ class Account
 
     public function __construct($username) {
         if(!is_file(dirname(__DIR__).'/data/'.$username.'.json')) {
-            Api::toJsonError('Utilisateur inconnu');
+            Api::error(404, 'Utilisateur inconnu');
         }
     }
 
@@ -22,3 +22,4 @@ class Account
         return $r;
     }
 }
+*/

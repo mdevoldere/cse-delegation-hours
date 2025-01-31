@@ -1,29 +1,62 @@
 <?php 
 
-require_once 'MasterConsole.php';
+define('USERS_FILE', dirname(__DIR__).'/data/members.php');
 
 class AccountManager
 { 
-    const MASTER_PASSWORD = '$2y$12$jlXd5B9qbFCjoyu3ht5xXeAkhZ7V64DC7eNIjFAl.Fj0UJyTSqZQe';
+    private static $users = [];
 
-    public static function loginMaster(): void {
-        $tries = 3;
+    /**
+     * Get all registered users
+     * @param bool $withPassword true=encrypted passwords included in result set. false=no password included
+     * @return array User list
+     */
+    public static function getUsers(bool $withPassword = true): array {
 
-        do {
-            $p = MasterConsole::prompt("Mot de passe Administrateur ?");
-
-            if(self::verifyPassword($p, self::MASTER_PASSWORD)) {
-                echo "Identification OK.\n";
-                return;
-            }
-            $tries--;
-            echo 'Mot de passe incorrect (essais restants: '.$tries.'/3).'."\n";
+        if(empty(self::$users)) {
+            self::$users = require_once USERS_FILE;
         }
-        while($tries > 0);
+        
+        if(true === $withPassword) {
+            return self::$users;
+        }
 
-        exit('Echec de l\'authentification.');
+        $t = self::$users;
+
+        foreach($t as $k => $m) {
+            unset($t[$k]['password']);
+        }
+
+        return $t;
     }
 
+    public static function getUser(string $username, bool $withPassword = true): array {
+        $t = self::getUsers($withPassword);
+
+        foreach($t as $m) {
+            if($username === $m['username']) {
+                return $m;
+            }
+        }
+
+        throw new Exception('Utilisateur non trouvé', 404);
+    }
+
+    public static function loginUser(string $username, string $password) {
+        $m = self::getUser($username, true);
+
+        if(password_verify($password, $m['password'])) {
+            unset($m['password']);
+            return $m;
+        }
+
+        throw new Exception('Utilisateur ou mot de passe incorrect', 401);
+    }
+
+
+    /* UTILITIES */
+
+    
     /**
      * Generate Hash from given password
      */
@@ -37,10 +70,5 @@ class AccountManager
     public static function verifyPassword($p, $h): bool {
         return password_verify($p, $h);
     }
-
-    public static function getAccount($username) {
-
-    }
-
     
 }

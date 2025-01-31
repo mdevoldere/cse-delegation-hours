@@ -1,22 +1,18 @@
 <?php 
 
-require_once '../../app/Api.php';
+try {
+    require_once '../../app/Loader.php';
 
-$d = json_decode(file_get_contents('php://input'), true);
+    $d = json_decode(file_get_contents('php://input'), true);
 
-if(empty($d['username']) || empty($d['password'])) {
-    APi::error(404, 'Utilisateur ou mot de passe incorrect.');
-}
-
-$t = require_once '../../data/members.php';
-
-foreach($t as $m) {
-    if($d['username'] === $m['username']) {
-        if(password_verify($d['password'], $m['password'])) {
-            unset($m['password']);
-            Api::response(200, $m);
-        }
+    if(empty($d['username']) || empty($d['password'])) {
+        throw new Exception('Utilisateur ou mot de passe incorrect.', 404);
     }
-}
 
-APi::error(401, 'Utilisateur ou mot de passe incorrect.');
+    $m = AccountManager::loginUser($d['username'], $d['password']);
+
+    Api::response(200, $m);
+}
+catch(Exception $e) {
+    APi::error($e->getCode(), $e->getMessage());
+}
