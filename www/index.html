@@ -12,14 +12,12 @@
 <body>
     <div id="app">
     <header>
-        <div class="top" v-if="usr.username !== null">
-            <i class="fa fa-user"></i> <a href="#" data-view="profile" @click="goto">{{ usr.username }}</a> 
-            | <a href="#" @click="logout">Déconnexion</a>
-        </div>
-        <div class="logo">
-            <img class="logo" src="./assets/logoh.jpg" alt="Logo CSE CRM">
-            <h1>Heures de délégation</h1>
-        </div>
+        <h1>Heures de délégation</h1>
+        <nav v-if="usr.username !== null">
+            <ul class="top">
+                <li><a href="#" data-view="profile" @click="goto"><i class="fa fa-user"></i> {{ usr.username }}</a> </li>
+            </ul>
+        </nav>
     </header>
     <main v-if="usr.username === null" class="login">
         <div>
@@ -35,10 +33,9 @@
     <main v-else>
         <nav>
             <ul class="menu">
-                <li><a href="#" data-view="home" @click="goto">Accueil</a></li>
-                <li><a href="#" data-view="profile" @click="goto">Mon profil</a></li>
+                <li><a href="#" data-view="home" @click="goto">Élus</a></li>
                 <li><a href="#" data-view="del" @click="goto">Mes heures</a></li>
-                <li><a href="#" data-view="donation" @click="goto">Transfert d'heures</a></li>
+                <li><a href="#" data-view="donation" @click="goto">Transfert</a></li>
             </ul>
         </nav>
         <section v-if="view === 'home'">
@@ -68,6 +65,9 @@
         </section>
         <section v-else-if="view === 'profile'" class="profile">
             <h2>Mon profil</h2>
+            <p>
+                <a href="#" @click="logout">Me déconnecter</a>
+            </p>
             <fieldset>
                 <legend>Mes informations</legend>
                     <p><label>Identifiant:</label> {{ usr.username }}</p>
@@ -95,12 +95,16 @@
                     <tr>
                         <td>Mois</td>
                         <td>Nombre d'heures</td>
+                        <td>Disponible</td>
+                        <td>Expiration</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="m of usr.month">
                         <td>{{ m }}</td>
                         <td>{{ usr.hours }}</td>
+                        <td>{{ usr.hours }}</td>
+                        <td>{{ usr.expireFr }}</td>
                     </tr>
                 </tbody>
             </table>

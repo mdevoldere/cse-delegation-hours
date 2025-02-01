@@ -48,37 +48,33 @@ button {
 }
 
 #app > header {
-    
-}
-
-.top {
-    text-align: right;
-    width: 100%;
-    max-width: 100%;
-    flex-basis: 100%;
-    padding: .1rem;
-}
-
-.logo {
-    display: flex;
-    justify-content: start;
-}
-
-.logo img {
-    height: 5rem;
+    background: transparent no-repeat;
+    background-image: url('./logoh.jpg');
+    background-size: auto 50px;
+    padding-left: 100px;
+    min-height: 50px;
 }
 
 #app > header h1 {
-    font-size: 2.4rem;
+    font-size: 2rem;
     padding: .2rem;
-    text-align: center;
 }
 
-#app > header aside {
-    padding: 1rem;
-    width: 14rem;
+.top {
+    display: flex;
+    align-items: stretch;
+    justify-content: right;
+    gap: .5rem;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
+.top a {
+    display: block;
+    padding: .3rem;
+}
 
 .menu {
     display: flex;
@@ -119,7 +115,6 @@ input, button {
 
 .login {
     padding: 5rem;
-    transform: scale(1.5);
 }
 
 .login div {
@@ -176,7 +171,7 @@ table {
     max-width: 100%;
     border: 1px solid var(--crm-primary);
     border-collapse: collapse;
-    overflow-y: scroll;
+    overflow-x: scroll;
 }
 
 th {

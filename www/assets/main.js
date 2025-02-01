@@ -49,6 +49,13 @@ class CseUser
     }
 }
 
+class Delegation 
+{
+    constructor() {
+        
+    }
+}
+
 const app = {
     components: {
         
