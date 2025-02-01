@@ -20,7 +20,7 @@ html {
 body {
     margin: 0;
     padding: 0;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: var(--bg);
     color: var(--crm-primary)
@@ -40,27 +40,51 @@ button {
 }
 
 #app > * {
-    width: 120rem;
+    width: 1200px;
+    max-width: 100%;
     margin: auto;
-    color: var(--crm-primary)
+    padding: .2rem;
+    color: var(--crm-primary);
 }
 
 #app > header {
+    
+}
+
+.top {
+    text-align: right;
+    width: 100%;
+    max-width: 100%;
+    flex-basis: 100%;
+    padding: .1rem;
+}
+
+.logo {
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
+}
+
+.logo img {
+    height: 5rem;
+}
+
+#app > header h1 {
+    font-size: 2.4rem;
+    padding: .2rem;
+    text-align: center;
 }
 
 #app > header aside {
     padding: 1rem;
+    width: 14rem;
 }
 
-.logo {
-    height: 8rem;
-}
 
 .menu {
     display: flex;
-    gap: 1rem;
+    align-items: stretch;
+    gap: 0;
+    margin: 0;
     padding: 0;
     list-style: none;
 }
@@ -72,6 +96,12 @@ button {
     color: var(--crm-secondary);
     background-color: var(--crm-primary);
     transition: all ease .6s;
+}
+
+.menu a {
+    border: 0;
+    padding: 1rem;
+    height: 100%;
 }
 
 
@@ -142,8 +172,11 @@ button:hover {
 }
 
 table {
+    display: block;
+    max-width: 100%;
     border: 1px solid var(--crm-primary);
     border-collapse: collapse;
+    overflow-y: scroll;
 }
 
 th {

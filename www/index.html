@@ -12,12 +12,14 @@
 <body>
     <div id="app">
     <header>
-        <img class="logo" src="./assets/logoh.jpg" alt="Logo CSE CRM">
-        <h1>Gestion des heures de délégations</h1>
-        <aside v-if="usr.username === null"></aside>
-        <aside v-else>
-            <i class="fa fa-user"></i> {{ usr.username }} <br> <a href="#" @click="logout">Déconnexion</a>
-        </aside>
+        <div class="top" v-if="usr.username !== null">
+            <i class="fa fa-user"></i> <a href="#" data-view="profile" @click="goto">{{ usr.username }}</a> 
+            | <a href="#" @click="logout">Déconnexion</a>
+        </div>
+        <div class="logo">
+            <img class="logo" src="./assets/logoh.jpg" alt="Logo CSE CRM">
+            <h1>Heures de délégation</h1>
+        </div>
     </header>
     <main v-if="usr.username === null" class="login">
         <div>
