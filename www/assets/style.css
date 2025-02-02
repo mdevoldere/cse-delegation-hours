@@ -132,6 +132,10 @@ input, button {
     align-items: stretch;
 }
 
+fieldset {
+    margin-bottom: 1rem;
+}
+
 label {
     display:inline-block;
     width: 18rem;

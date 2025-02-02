@@ -5,9 +5,9 @@ try {
 
     if(!empty($_GET['u'])) {
         $d = trim($_GET['u']);
-        $t = AccountManager::getUser($d, false);
+        $t = DbSqlite::getUser($d, false);
     } else {
-        $t = AccountManager::getUsers(false);
+        $t = DbSqlite::getUsers();
     }
 
     Api::response(200, $t);

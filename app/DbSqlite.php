@@ -70,13 +70,26 @@ class DbSqlite
 
     public static function getUsers(): array {
         try {
+            $stmt = self::db()->prepare(
+                "SELECT id, adm, lastname, firstname, pwd, m_titular, m_mid, m_start, m_end, m_actual_start, m_actual_end 
+                FROM users
+                JOIN users_mandates ON users.id = users_mandates.m_uid 
+                JOIN mandates ON users_mandates.m_mid = mandates.m_id"
+            );
 
+            if($stmt->execute()) {
+                $u = $stmt->fetchAll();
+                foreach($u as $i => $usr) {
+                    unset($u[$i]['pwd']);
+                }
+                return $u;
+            }
+
+            return [];
         }
         catch(Exception $e) {
-            throw new Exception('. ' . $e->getMessage());
+            throw new Exception('Erreur BDD User. ' . $e->getMessage());
         }
-        
-        return [];
     }
 
     public static function getMandates(): array {

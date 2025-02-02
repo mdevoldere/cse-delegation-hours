@@ -13,13 +13,13 @@
     <div id="app">
     <header>
         <h1>Heures de délégation</h1>
-        <nav v-if="usr.username !== null">
+        <nav v-if="usr.id !== null">
             <ul class="top">
-                <li><a href="#" data-view="profile" @click="goto"><i class="fa fa-user"></i> {{ usr.username }}</a> </li>
+                <li><a href="#" data-view="profile" @click="goto"><i class="fa fa-user"></i> {{ usr.id }}</a> </li>
             </ul>
         </nav>
     </header>
-    <main v-if="usr.username === null" class="login">
+    <main v-if="usr.id === null" class="login">
         <div>
             <input type="text" placeholder="Identifiant" v-model="credentials.username">
         </div>
@@ -53,11 +53,11 @@
                 </thead>
                 <tbody>
                     <tr v-for="m of members">
-                        <td :class="{ titular: m.titular }">{{ m.username }}</td>
-                        <td>{{ m.electedFr }}</td>
-                        <td>{{ m.expireFr }}</td>
-                        <td>{{ m.titular ? 'Oui' : 'Non' }}</td>
-                        <td>{{ m.admin ? 'Oui' : 'Non' }}</td>
+                        <td :class="{ titular: m.m_titular === 1 }">{{ m.id }}</td>
+                        <td>{{ m.getDateStart() }}</td>
+                        <td>{{ m.getDateEnd() }}</td>
+                        <td>{{ m.m_titular === 1 ? 'Oui' : 'Non' }}</td>
+                        <td>{{ m.adm ? 'Oui' : 'Non' }}</td>
                         <td>{{ m.hours }}</td>
                     </tr>
                 </tbody>
@@ -70,9 +70,11 @@
             </p>
             <fieldset>
                 <legend>Mes informations</legend>
-                    <p><label>Identifiant:</label> {{ usr.username }}</p>
-                    <p><label>Date d'élection:</label> {{ usr.electedFr }}</p>
-                    <p><label>Fin de mandat:</label> {{ usr.expireFr }}</p>
+                <p><label>Identifiant:</label> {{ usr.id }}</p>
+                <p><label>Nom:</label> {{ usr.lastname }}</p>
+                <p><label>Prénom:</label> {{ usr.firstname }}</p>
+                <p><label>Date d'élection:</label> {{ usr.getDateStart() }}</p>
+                <p><label>Fin de mandat:</label> {{ usr.getDateEnd() }}</p>
             </fieldset>
             <fieldset>
                 <legend>Mon mot de passe</legend>

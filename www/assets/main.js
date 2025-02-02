@@ -6,46 +6,59 @@ class CseUser
         this.logout();
     }
 
+    getDateStart() {
+        return this.date_start.toLocaleDateString('fr-FR');
+    }
+
+    getDateEnd() {
+        return this.date_end.toLocaleDateString('fr-FR');
+    }
+
     login(_o) {
         Object.assign(this, _o);
 
-        if(this.titular === true) {
-            this.hours = 22;
-        } else {
-            this.hours = 11;
-        }
+        this.hours = (this.m_titular === 1) ? 22 : 11;
 
-        let d = new Date(this.elected);
-        this.electedFr = d.toLocaleDateString();
-        d.setFullYear(d.getFullYear() + 4);
-        this.expire = d.toLocaleDateString('fr-CA');
-        this.expireFr = d.toLocaleDateString();
+        this.date_start = new Date(this.m_actual_start); 
+
+        if(this.m_actual_end !== "") {
+            this.date_end = new Date(this.m_actual_end);
+        } else {
+            this.date_end = new Date(this.m_end);
+        }
+        
         this.setHours();
+        console.log(this);
     }
 
     logout() {
-        this.username = null;
-        this.admin = false;
-        this.elected = '0000-00-00';
-        this.electedFr = '00/00/0000';
-        this.expire = '0000-00-00';
-        this.titular = true;
+        this.id = null;
+        this.adm = false;
         this.hours = 0;
         this.month = [];
     }
 
     setHours() {
-        let s = new Date(this.elected);
-        let e = new Date(this.expire);
+        let s = new Date(this.date_start);
+        let e = new Date(this.date_end);
         while(s <= e) {
             //this.month.push(s.toLocaleDateString('fr-FR'));
             this.month.push((('0' + (s.getMonth())).slice(-2)) + '/' + s.getFullYear());
 
             s.setMonth(s.getMonth() + 1);
+
             if(s.getMonth() == 0) {
                 s.setMonth(s.getMonth() + 1);
             }            
         }
+    }
+}
+
+class DelegationHours 
+{
+    constructor(uid, year, month) {
+        this.uid = uid;
+        this.date = new Date('');
     }
 }
 
@@ -93,13 +106,13 @@ const app = {
             this.view = e.target.dataset.view;
         },
         async login() {
-            let r = await Ajax.post('./api/account.php', this.credentials);
+            let r = await Ajax.post('./api/login.php', this.credentials);
 
             if(r.error) {
                 alert(r.error);
             } else {
                 this.usr.login(r);
-                localStorage.setItem('u', this.usr.username);
+                localStorage.setItem('u', this.usr.id);
                 this.getUsers();
             }
         },
