@@ -40,16 +40,15 @@ class CseUser
 
     setHours() {
         let s = new Date(this.date_start);
+        s.setMonth(s.getMonth()+1);
+        //console.log(s.getMonth());
         let e = new Date(this.date_end);
         while(s <= e) {
             //this.month.push(s.toLocaleDateString('fr-FR'));
-            this.month.push((('0' + (s.getMonth())).slice(-2)) + '/' + s.getFullYear());
+            this.month.push((('0' + (s.getMonth()+1)).slice(-2)) + '/' + s.getFullYear());
 
             s.setMonth(s.getMonth() + 1);
-
-            if(s.getMonth() == 0) {
-                s.setMonth(s.getMonth() + 1);
-            }            
+          
         }
     }
 }

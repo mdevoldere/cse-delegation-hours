@@ -92,6 +92,29 @@ class DbSqlite
         }
     }
 
+    public static function getUserDelegations(string $u): array {
+        try {
+            $stmt = self::db()->prepare(
+                "SELECT d_id, d_uid, d_start, d_end 
+                FROM delegations
+                JOIN users_mandates ON users.id = users_mandates.m_uid 
+                JOIN mandates ON users_mandates.m_mid = mandates.m_id
+                WHERE id=:id 
+                ORDER BY m_mid DESC LIMIT 1"
+            );
+
+            if($stmt->execute([':id' => $u])) {
+                $u = $stmt->fetchAll();
+                return $u;
+            }
+
+            return [];
+        }
+        catch(Exception $e) {
+            throw new Exception('Erreur BDD Delegations. ' . $e->getMessage());
+        }
+    }
+
     public static function getMandates(): array {
         try {
 
